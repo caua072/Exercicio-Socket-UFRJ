@@ -11,8 +11,9 @@ def start_client(host='localhost', port=65432):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((host, port))
         params = get_question_parameters()
-        s.sendall(params.encode())
-        data = s.recv(1024)
+        print(type(params))
+        s.sendall(params.encode()) # Envia os parametros em bytes. (String --> bytes)
+        data = s.recv(1024) # Recebe os dados do servidor em bytes e decodifica para string 
         print(f'Resposta do servidor: {data.decode()}')
 
 if __name__ == "__main__":
