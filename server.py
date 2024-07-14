@@ -1,33 +1,18 @@
 import socket
+from questions import *
 
-# Função de conversão das bases
-# A função recebe o valor de origem, de qual base é o valor de origem (bin, dec, hex) e qual base o valor deve ser convertido.
+"""
+  O que cada função das questões recebem como parametro e retornam)
 
-# A logica dessa função é converter qualquer que for o valor de origem para a base decimal(utlizando a função int() do python) e 
-# depois converter da base decimal para a base solicitada utilizando 
+  Questão 1: 
+  Recebe um valor de origem(inteiro), base do valor de origem(bin, dec, hex) e qual base deve ser convertido.
+  
+  Retorna uma String.
 
-# Retorna uma string.
+  Questão 2:
+  
 
-def convert_base(value, from_base, to_base):
-    # Converte o valor para decimal
-    if from_base == 'bin':
-        decimal_value = int(value, 2) 
-    elif from_base == 'hex':
-        decimal_value = int(value, 16)
-    elif from_base == 'dec':
-        decimal_value = int(value)
-    else:
-        return "Base de origem inválida"
-
-    # Converte de decimal para a base de destino
-    if to_base == 'bin':
-        return bin(decimal_value)[2:]  # [2:] remove o prefixo '0b' da string
-    elif to_base == 'hex':
-        return hex(decimal_value)[2:]  # [2:] remove o prefixo '0x' da string
-    elif to_base == 'dec':
-        return str(decimal_value) # já que o valor já está em decimal é só transformar o inteiro em string com o str()
-    else:
-        return "Base de destino inválida"
+"""
 
 def start_server(host='localhost', port=65432):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s: # socket Internet TCP
@@ -48,7 +33,7 @@ def start_server(host='localhost', port=65432):
                     result = "Entrada inválida. Esperado: valor,base_origem,base_destino"
                 else:
                     value, from_base, to_base = params
-                    result = convert_base(value, from_base, to_base)
+                    result = questao1_converter_bases(value, from_base, to_base)
                 conn.sendall(result.encode()) # Envia o resultado de volta ao cliente, codificando em bytes a string.
 
 if __name__ == "__main__":
