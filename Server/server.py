@@ -12,6 +12,10 @@ from questions import *
   Recebe 1 valor decimal (float)
   Retorna 2 variaveis string, 
 
+  Questão 5:
+  Recebe 1 frase qualquer
+  Retorna 2 variaveis string
+
   Questão 6:
   Recebe uma expressão logica
   Retorna o nome do arquivo ('circuito.jpg')
@@ -57,6 +61,12 @@ def start_server(host='localhost', port=65432):
                     params = data.decode()
                     binary_representation, hex_representation = questão4_float_para_ieee754(float(params))
                     result = f'IEEE 754 é: {binary_representation}\nHexadecimal: {hex_representation}\n'
+
+                # Questão 5
+                elif question == 5:
+                    params = data.decode()
+                    representacao_hex, quantidade_bytes = questão5_utf8(params)
+                    result = f'Hex: {representacao_hex}\nBytes: {quantidade_bytes}'
                 
                 # Questão 6
                 elif question == 6:

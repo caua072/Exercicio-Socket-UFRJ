@@ -63,6 +63,22 @@ def questão4_float_para_ieee754(number):
     return binary_representation, hex_representation
 
 """
+QUESTÃO 5
+"""
+
+# Função recebe um texto str e retorna sua representação em hexadecimal utf-8 e quantidade de bytes.
+
+# Recebe string
+# Retorna sua representação em hex e quantos bytes.
+
+def questão5_utf8(texto):
+    encoded = texto.encode('utf-8')
+    representacao_hex = encoded.hex()
+    count_bytes = len(encoded)
+
+    return representacao_hex, str(count_bytes)
+
+"""
 QUESTÃO 6
 """
 # Função recebe um literal como a expressão que deve ser desenhada pela função logicparse

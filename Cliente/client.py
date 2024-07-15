@@ -23,6 +23,11 @@ def get_question4_parameters():
     number = input('Digite o valor decimal qualquer: ')
     return number
 
+# Questão 5
+def get_question5_parameters():
+    texto = input('Digite o texto a ser codificado: ')
+    return texto
+
 # Questão 6
 def get_question6_parameters():
     expressao = input('Digite a expressão que deverá ser desenhada: ')
@@ -40,6 +45,8 @@ def start_client(host='localhost', port=65432):
             params = get_question1_parameters()
         elif question == 4:
             params = get_question4_parameters()
+        elif question == 5:
+            params = get_question5_parameters()
         elif question == 6:
             params = get_question6_parameters()
 
