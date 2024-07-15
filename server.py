@@ -6,11 +6,11 @@ from questions import *
 
   Questão 1: 
   Recebe um valor de origem(inteiro), base do valor de origem(bin, dec, hex) e qual base deve ser convertido.
-  
   Retorna uma String.
 
-  Questão 2:
-  
+  Questão 4:
+  Recebe 1 valor decimal (float)
+  Retorna 2 variaveis string, 
 
 """
 
@@ -24,16 +24,37 @@ def start_server(host='localhost', port=65432):
             conn, addr = s.accept() # Função accept() retorna um socket representando a conexão (conn) e e o endereço do client (addr).
             with conn: # with utilizado por motivo de segurança, caso algo de errado o with encerra a conexão.
                 print(f'Conectado por {addr}')
+
+                # Receber qual questão cliente quer fazer
+                question_data = conn.recv(1024)
+                if not question_data:
+                    break
+                question = question_data.decode()
+                question = int(question)
+
+                # Receber os parametros da questão.
                 data = conn.recv(1024)
-                print(type(data))
                 if not data: # Quando o servidor não enviar dados irá dar break.
                     break
-                params = data.decode().split(',') # O servidor recebe a data em bytes e decodifica retornando a ser uma string.
-                if len(params) != 3:
-                    result = "Entrada inválida. Esperado: valor,base_origem,base_destino"
-                else:
-                    value, from_base, to_base = params
-                    result = questao1_converter_bases(value, from_base, to_base)
+                
+                # Processamentos dos parametros
+
+                # Questão 1
+                if question == 1:
+                    params = data.decode().split(',') # O servidor recebe a data em bytes e decodifica retornando a ser uma string.
+                    if len(params) != 3:
+                        result = "Entrada inválida. Esperado: valor,base_origem,base_destino"
+                    else:
+                        value, from_base, to_base = params
+                        result = questao1_converter_bases(value, from_base, to_base)
+                
+                # Questão 4
+                elif question == 4:
+                    params = data.decode()
+                    binary_representation, hex_representation = questão4_float_para_ieee754(float(params))
+                    result = f'A representação IEEE 754 é: {binary_representation} e seus digitos hexadecimais são: {hex_representation}'
+
+                # Envio do processamento ao client
                 conn.sendall(result.encode()) # Envia o resultado de volta ao cliente, codificando em bytes a string.
 
 if __name__ == "__main__":
