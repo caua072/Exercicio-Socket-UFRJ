@@ -1,4 +1,4 @@
-import socket
+import socket, os
 from questions import *
 
 """
@@ -11,6 +11,10 @@ from questions import *
   Questão 4:
   Recebe 1 valor decimal (float)
   Retorna 2 variaveis string, 
+
+  Questão 6:
+  Recebe uma expressão logica
+  Retorna o nome do arquivo ('circuito.jpg')
 
 """
 
@@ -43,7 +47,7 @@ def start_server(host='localhost', port=65432):
                 if question == 1:
                     params = data.decode().split(',') # O servidor recebe a data em bytes e decodifica retornando a ser uma string.
                     if len(params) != 3:
-                        result = "Entrada inválida. Esperado: valor,base_origem,base_destino"
+                        result = "Entrada inválida. Esperado: valor,base_origem,base_destino\n"
                     else:
                         value, from_base, to_base = params
                         result = questao1_converter_bases(value, from_base, to_base)
@@ -52,7 +56,19 @@ def start_server(host='localhost', port=65432):
                 elif question == 4:
                     params = data.decode()
                     binary_representation, hex_representation = questão4_float_para_ieee754(float(params))
-                    result = f'A representação IEEE 754 é: {binary_representation} e seus digitos hexadecimais são: {hex_representation}'
+                    result = f'IEEE 754 é: {binary_representation}\nHexadecimal: {hex_representation}\n'
+                
+                # Questão 6
+                elif question == 6:
+                    params = data.decode()
+                    namefile = questão6_desenhar_logica_bool(params)
+
+                    with open(namefile, 'rb') as arquivo:
+                        for data in arquivo.readlines():
+                            conn.send(data) 
+                    os.remove(namefile) # Exclui o arquivo do servidor
+
+                    result = 'Desenho enviado com sucesso\n'
 
                 # Envio do processamento ao client
                 conn.sendall(result.encode()) # Envia o resultado de volta ao cliente, codificando em bytes a string.

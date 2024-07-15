@@ -23,6 +23,11 @@ def get_question4_parameters():
     number = input('Digite o valor decimal qualquer: ')
     return number
 
+# Questão 6
+def get_question6_parameters():
+    expressao = input('Digite a expressão que deverá ser desenhada: ')
+    return expressao
+
 def start_client(host='localhost', port=65432):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((host, port))
@@ -35,11 +40,27 @@ def start_client(host='localhost', port=65432):
             params = get_question1_parameters()
         elif question == 4:
             params = get_question4_parameters()
+        elif question == 6:
+            params = get_question6_parameters()
 
         
         s.sendall(params.encode()) # Envia os parametros em bytes. (String --> bytes)
-        data = s.recv(1024) # Recebe os dados do servidor em bytes e decodifica para string 
-        print(f'Resposta do servidor: {data.decode()}')
+
+
+        # Caso a questão selecionado seja a 6, o cliente recebe apenas o arquivo.
+        if question == 6:
+            with open('circuito.jpg', 'wb') as file:
+                while True:
+                    dados = s.recv(10000)
+                    if not dados:
+                        break
+                    file.write(dados)
+
+            print('Desenho recebido com sucesso')
+
+        else:
+            result = s.recv(1024) # Recebe os dados do servidor em bytes e decodifica para string 
+            print(f'Resposta do servidor:\n{result.decode()}')
 
 if __name__ == "__main__":
     start_client()

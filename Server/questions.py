@@ -1,4 +1,6 @@
-import socket, struct
+import socket, struct, schemdraw, pyparsing
+from schemdraw.parsing import logicparse
+
 
 """
 QUESTÃO 1
@@ -59,3 +61,17 @@ def questão4_float_para_ieee754(number):
     hex_representation = f'{integer_representation:08X}'
     
     return binary_representation, hex_representation
+
+"""
+QUESTÃO 6
+"""
+# Função recebe um literal como a expressão que deve ser desenhada pela função logicparse
+# Retorna o nome do arquivo ('circuito.jpg').
+
+def questão6_desenhar_logica_bool(expressao):
+    arquivo = 'circuito.jpg'
+
+    circuito = logicparse(expressao, outlabel='$S$')
+    circuito.save(arquivo)
+
+    return arquivo
