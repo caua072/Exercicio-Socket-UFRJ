@@ -20,6 +20,9 @@ from questions import *
   Recebe uma expressão logica
   Retorna o nome do arquivo ('circuito.jpg')
 
+  Questão 7:
+  Recebe 3 valores booleanos (True ou False) ou inteiros (1 ou 0)
+  Retorna um valor booleano ou inteiro
 """
 
 def start_server(host='localhost', port=65432):
@@ -39,6 +42,8 @@ def start_server(host='localhost', port=65432):
                     break
                 question = question_data.decode()
                 question = int(question)
+
+                print(f'Questão {question} selecionada. \n')
 
                 # Receber os parametros da questão.
                 data = conn.recv(1024)
@@ -79,6 +84,25 @@ def start_server(host='localhost', port=65432):
                     os.remove(namefile) # Exclui o arquivo do servidor
 
                     result = 'Desenho enviado com sucesso\n'
+                
+                elif question == 7:
+                    params = data.decode().split(',')
+                    if len(params) != 3:
+                        result = "Entrada inválida. Esperado: A, B, C\n"
+                    else:
+                        A, B, C = params
+
+                        a = 1 if A == 'True' else 0
+                        b = 1 if B == 'True' else 0
+                        c = 1 if C == 'True' else 0
+
+                        and3 = (a and b and c)
+                        and4 = questão7_and3_com_and4(a, b, c)
+
+                        and3 = 'True' if and3 == 1 else 'False'
+                        and4 = 'True' if and4 == 1 else 'False'
+
+                        result = f'({A} and {B} and {C}) = {and3} equivalente ({A} and {B} and {C} and "1") = {and4}\n' 
 
                 # Envio do processamento ao client
                 conn.sendall(result.encode()) # Envia o resultado de volta ao cliente, codificando em bytes a string.

@@ -1,4 +1,4 @@
-import socket, struct, schemdraw, pyparsing
+import struct
 from schemdraw.parsing import logicparse
 
 
@@ -10,7 +10,7 @@ QUESTÃO 1
 # A função recebe o valor de origem, de qual base é o valor de origem (bin, dec, hex) e qual base o valor deve ser convertido.
 
 # A logica dessa função é converter qualquer que for o valor de origem para a base decimal(utlizando a função int() do python) e 
-# depois converter da base decimal para a base solicitada utilizando 
+# depois converter da base decimal para a base solicitada utilizando
 
 # Retorna uma string.
 
@@ -91,3 +91,13 @@ def questão6_desenhar_logica_bool(expressao):
     circuito.save(arquivo)
 
     return arquivo
+
+"""
+QUESTÃO 7
+"""
+
+# Funcão que recebe 3 valores de 1 ou 0 (True ou False)
+# Retorna um booleano.
+
+def questão7_and3_com_and4(A, B, C):
+    return (A and B and C and True)

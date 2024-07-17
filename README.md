@@ -11,6 +11,15 @@ Exercicio que consiste em resolver as questões da p1 da disciplina de fundament
 - Thiago Simoes Blandi Correa
 
 
+## Dependências
+
+Para a questão 6:
+
+```bash
+  pip install schemdraw
+  pip install pyparsing
+```
+    
 ## Versão Generica da P1
 
 - Questão 1:

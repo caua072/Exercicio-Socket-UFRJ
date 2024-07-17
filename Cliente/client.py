@@ -33,6 +33,19 @@ def get_question6_parameters():
     expressao = input('Digite a expressão que deverá ser desenhada: ')
     return expressao
 
+# Questão 7
+def get_question7_parameters():
+    while True:
+        print('Digite se as variaveis a seguir são True ou False: \n')
+        A = input('A: ')
+        B = input('B: ')
+        C = input('C: ')
+        if (A != 'True' and A != 'False') or (B != 'True' and B != 'False') or (C != 'True' and C != 'False'):
+            print('Tente novamente: \n')
+        else:
+            break
+    return f"{A},{B},{C}"
+
 def start_client(host='localhost', port=65432):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((host, port))
@@ -49,6 +62,8 @@ def start_client(host='localhost', port=65432):
             params = get_question5_parameters()
         elif question == 6:
             params = get_question6_parameters()
+        elif question == 7:
+            params = get_question7_parameters()
 
         
         s.sendall(params.encode()) # Envia os parametros em bytes. (String --> bytes)
