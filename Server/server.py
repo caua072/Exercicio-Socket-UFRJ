@@ -61,6 +61,14 @@ def start_server(host='localhost', port=65432):
                         value, from_base, to_base = params
                         result = questao1_converter_bases(value, from_base, to_base)
                 
+                elif question == 2:
+                    params = data.decode()
+                    if len(params) != 3:
+                        result = "Entrada inválida. Esperado: valor1, valor2, operador\n"
+                    else:
+                        value1, value2, operator = params
+                        result = questao2_operadores()
+
                 # Questão 4
                 elif question == 4:
                     params = data.decode()

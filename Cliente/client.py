@@ -18,6 +18,12 @@ def get_question1_parameters():
     to_base = input('Digite a base de destino (bin/dec/hex): ')
     return f"{value},{from_base},{to_base}"
 
+def get_question2_parameters():
+    value1 = input('Digite o primeiro valor a ser operado: ')
+    value2 = input('Digite o segundo valor a ser operado: ')
+    operator = input('Digite a operação a ser realizada ( + | - | * | / ): ')
+    return f"{value1},{value2},{operator}"
+
 # Questão 4
 def get_question4_parameters():
     number = input('Digite o valor decimal qualquer: ')
