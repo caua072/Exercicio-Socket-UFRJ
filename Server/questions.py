@@ -35,6 +35,39 @@ def questao1_converter_bases(value, from_base, to_base):
     else:
         return "Base de destino inválida"
 
+def questao2_operadores(value1, value2, operator):
+    # Converter valores complemento a 2 para decimal
+    def complemento_a_2(value):
+        if value[0] == "1":
+            # Inverto os bits por ser negativo
+            inv_value = "".join("1" if i == "0" else "0" for i in value)
+            # Adiciona 1 ao bit invertido convertido para decimal
+            valor_decimal = int(inv_value, 2) + 1
+            # Converte para negativo
+            valor_decimal = -valor_decimal
+        else:
+            valor_decimal = int(value, 2)
+        return valor_decimal
+
+    # Conversão dos valores para decimal
+    valor1 = complemento_a_2(value1)
+    valor2 = complemento_a_2(value2)
+    
+    if operator == "+":
+        result = valor1 + valor2
+    elif operator == "-":
+        result = valor1 - valor2
+    elif operator == "*":
+        result = valor1 * valor2
+    elif operator == "/":
+        if valor2 != 0:
+            result = valor1 // valor2
+        else:
+            return "Divisão por zero"
+    else:
+        return "Erro: Operador inválido"
+    
+    return result
 
 """
 QUESTÃO 4
