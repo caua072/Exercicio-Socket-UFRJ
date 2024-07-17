@@ -26,15 +26,9 @@ Para a questão 6:
 
 Faça a conversão de bases de um número qualquer (Binario, Decimal, Hexadecimal)
 
-- Questão 2:
+- Questão 2 e 3:
 
-a) Realize a soma de dois números binários em complemento a 2.
-
-b) Realize a subtração de dois números binários em complemento de 2.
-
-- Questão 3:
-
-Realize a divisão inteira de dois números binários em complemento de 2.
+Dado dois valores binarios em complemento a 2 realize suas operações
 
 - Questão 4:
 

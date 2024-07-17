@@ -62,6 +62,8 @@ def start_client(host='localhost', port=65432):
 
         if question == 1:
             params = get_question1_parameters()
+        elif question == 2:
+            params = get_question2_parameters()
         elif question == 4:
             params = get_question4_parameters()
         elif question == 5:
